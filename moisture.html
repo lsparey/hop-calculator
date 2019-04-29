@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <style type="text/css">
+            body {
+                background: #eee;
+            }
+
+            div {
+                margin: 1em;
+            }
+
+            label {
+                display: inline-block;
+                width: 9em;
+                font: 1em arial;
+            }
+
+            input {
+                height: 2em;
+                width: 4em;
+                line-height: 2em;
+                font-weight: bold;
+                text-align: center;
+                
+            }
+
+            #moisture {
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <label for="weight_before">Hops before drying</label>
+            <input type="number" id="weight_before" onchange="update_values()" onkeyup="update_values()" />
+            <span>g</span>
+        </div>
+
+        <div>
+            <label for="weight_after">Hops after drying</label>
+            <input type="number" id="weight_after" onchange="update_values()" onkeyup="update_values()" />
+            <span>g</span>
+        </div>
+
+        <div>
+            <label for="moisture">Moisture</label>
+            <input type="text" id="moisture" readonly />
+            <span>%</span>
+        </div>
+
+        <script type="text/javascript">
+            var weight_before = document.getElementById("weight_before"),
+                weight_after = document.getElementById("weight_after"),
+                moisture = document.getElementById("moisture");
+
+            function update_values() {
+                var before_value = parseFloat(weight_before.value),
+                    after_value = parseFloat(weight_after.value),
+                    difference = before_value - after_value,
+                    result = difference / after_value;
+
+                console.log(difference + "g =" + result);
+
+                moisture.value = (result * 100).toFixed(2);
+            }
+        </script>
+    </body>
+</html>
